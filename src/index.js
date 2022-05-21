@@ -5,7 +5,7 @@ const ctx = canvas.getContext('2d')
 // import all needed classes
 import { Player } from './classes/player'
 import { Platform } from './classes/platform'
-import { Project } from './classes/project'
+import { Projects } from './classes/project'
 import { SocialLink } from './classes/socialLink'
 
 canvas.height = innerHeight
@@ -14,8 +14,10 @@ canvas.width = innerWidth
 // platform
 const platform = new Platform(1000, 500, 200, 50)
 const platform1 = new Platform(600, 400, 200, 50)
-const ground = new Platform(0,700, canvas.width, 50)
 const platforms = [platform, platform1]
+
+// projects
+const projects = new Projects(300, 100, 'hello', 'https://tyreeckcodes.com')
 
 // player and its movement
 const player1 = new Player()
@@ -57,7 +59,6 @@ addEventListener('keyup', ({key}) => {
         case 'd' || 'D':
             right.isPressed = false; break;
 
-
     }
 })
 
@@ -72,12 +73,24 @@ const play = () => {
     platforms.forEach(platform => {
 
         platform.draw(ctx)
-        console.log(player1.position.x + 100, platform.position.x, player1.position.y - 100, platform.position.y)
 
         if (player1.position.y + 100 <= platform.position.y && player1.position.y + 100 + player1.velocity.y >= platform.position.y && player1.position.x + 100 >= platform.position.x && player1.position.x <= platform.position.x + platform.demensions.width) {
             player1.velocity.y = 0
         }
     })
+
+    // draw projects and detect collisions
+    projects.update(ctx)
+    
+    if (player1.position.x + 100 >= projects.position.x && player1.position.x <= projects.position.x + 300 && player1.position.y <= projects.position.y + 150) {
+
+        // open link to project
+        open(projects.projects[projects.currentProjectIndex].link, '_blank')
+
+        // disable buttons to prevent multiple pages from opening
+        left.isPressed = false
+        right.isPressed = false
+    }
 
     // update velocity based on events
     if (right.isPressed) {
@@ -94,6 +107,7 @@ const play = () => {
         player1.velocity.x = -5
     } 
 
+    // draw player
     player1.update(ctx)
 
 
