@@ -11,6 +11,12 @@ import { SocialLink } from './classes/socialLink'
 canvas.height = innerHeight
 canvas.width = innerWidth
 
+// platform
+const platform = new Platform(1000, 500, 200, 50)
+const platform1 = new Platform(600, 400, 200, 50)
+const ground = new Platform(0,700, canvas.width, 50)
+const platforms = [platform, platform1]
+
 // player and its movement
 const player1 = new Player()
 
@@ -33,12 +39,11 @@ addEventListener('keydown', (event) => {
         case 'd' || 'D':
             right.isPressed = true; break;
 
-        case 'w' || 'W' && !event.repeat:
-            if (player1.velocity.y === 0) {
-
-                player1.velocity.y -= 20; break;
-
+        case 'w' || 'W':
+            if (!event.repeat) {
+                player1.velocity.y -= 24; break;
             }
+            
     }
 })
 
@@ -62,20 +67,35 @@ addEventListener('keyup', ({key}) => {
 const play = () => {
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    player1.update(ctx)
+    
+    // draw platforms and detect collisions
+    platforms.forEach(platform => {
+
+        platform.draw(ctx)
+        console.log(player1.position.x + 100, platform.position.x, player1.position.y - 100, platform.position.y)
+
+        if (player1.position.y + 100 <= platform.position.y && player1.position.y + 100 + player1.velocity.y >= platform.position.y && player1.position.x + 100 >= platform.position.x && player1.position.x <= platform.position.x + platform.demensions.width) {
+            player1.velocity.y = 0
+        }
+    })
 
     // update velocity based on events
     if (right.isPressed) {
+
         player1.velocity.x = 5
+
     } else {
+
         player1.velocity.x = 0
     }
 
     if (left.isPressed) {
+
         player1.velocity.x = -5
     } 
 
-    
+    player1.update(ctx)
+
 
     requestAnimationFrame(play)
 }
