@@ -4,9 +4,11 @@ import donutland2 from '../images/projects_images/donutland2.png'
 import reddit from '../images/projects_images/reddit.png'
 import sunnyside from '../images/projects_images/sunnyside.png'
 import mblog from '../images/projects_images/mblog.png'
+// helper functions
+import { returnImage } from '../helper_functions/helper'
 
 class Project {
-    // img == project screenshot, link == website link
+    // project == image and link to project
     constructor(x, y, project) {
         this.project = project
 
@@ -34,13 +36,7 @@ class Project {
 
 }
 
-// image with change src
-const returnImage = (src) => {
-    const image = new Image()
-    image.src = src
-    return image
-}
-
+// all projects to be rendered
 export const projects = [
 
     new Project(200, 0,{
