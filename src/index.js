@@ -14,7 +14,9 @@ canvas.width = innerWidth
 // platform
 const platform = new Platform(1000, 500, 200, 50)
 const platform1 = new Platform(600, 400, 200, 50)
-const platforms = [platform, platform1]
+const ground = new Platform(0, 800, canvas.width / 3, 50)
+const ground1 = new Platform(900, 800, canvas.width / 1.5, 50)
+const platforms = [ground, ground1, platform, platform1]
 
 // player and its movement
 const player1 = new Player()
@@ -60,7 +62,6 @@ addEventListener('keyup', ({key}) => {
 })
 
 
-
 // play the game -- animate canvas
 const play = () => {
     // clear canvas
@@ -93,7 +94,7 @@ const play = () => {
 
     // draw social links and detect collisions
     socialLinks.forEach(socialLink => {
-        console.log(socialLink)
+
         socialLink.draw(ctx)
 
         if (player1.position.x + 100 >= socialLink.position.x && player1.position.x <= socialLink.position.x + socialLink.dimensions.width && player1.position.y <= socialLink.position.y + 50) {
@@ -105,6 +106,15 @@ const play = () => {
             right.isPressed = false
         }
     })
+
+    // detect death and reset character/map position
+    if (player1.position.y > 800) {
+
+        // reset player position
+        player1.position = {x: 100, y: 600}
+
+        // reset background position
+    }
 
     // update velocity based on events
     if (right.isPressed) {
