@@ -5,7 +5,7 @@ const ctx = canvas.getContext('2d')
 // import all needed classes
 import { Player } from './classes/player'
 import { Platform } from './classes/platform'
-import { Projects } from './classes/project'
+import { projects } from './classes/project'
 import { SocialLink } from './classes/socialLink'
 
 canvas.height = innerHeight
@@ -15,9 +15,6 @@ canvas.width = innerWidth
 const platform = new Platform(1000, 500, 200, 50)
 const platform1 = new Platform(600, 400, 200, 50)
 const platforms = [platform, platform1]
-
-// projects
-const projects = new Projects(300, 100, 'hello', 'https://tyreeckcodes.com')
 
 // player and its movement
 const player1 = new Player()
@@ -80,17 +77,19 @@ const play = () => {
     })
 
     // draw projects and detect collisions
-    projects.update(ctx)
+    projects.forEach(project => {
+        project.draw(ctx)
+        console.log(project)
     
-    if (player1.position.x + 100 >= projects.position.x && player1.position.x <= projects.position.x + 300 && player1.position.y <= projects.position.y + 150) {
+        if (player1.position.x + 100 >= project.position.x && player1.position.x <= project.position.x + project.dimensions.width && player1.position.y <= project.position.y + 150) {
+            // open link to project
+            open(project.project.link, '_blank')
 
-        // open link to project
-        open(projects.projects[projects.currentProjectIndex].link, '_blank')
-
-        // disable buttons to prevent multiple pages from opening
-        left.isPressed = false
-        right.isPressed = false
-    }
+            // disable buttons to prevent multiple pages from opening
+            left.isPressed = false
+            right.isPressed = false
+        }
+    })
 
     // update velocity based on events
     if (right.isPressed) {
