@@ -6,7 +6,7 @@ const ctx = canvas.getContext('2d')
 import { Player } from './classes/player'
 import { Platform } from './classes/platform'
 import { projects } from './classes/project'
-import { SocialLink } from './classes/socialLink'
+import { socialLinks } from './classes/socialLink'
 
 canvas.height = innerHeight
 canvas.width = innerWidth
@@ -78,12 +78,27 @@ const play = () => {
 
     // draw projects and detect collisions
     projects.forEach(project => {
+
         project.draw(ctx)
-        console.log(project)
     
         if (player1.position.x + 100 >= project.position.x && player1.position.x <= project.position.x + project.dimensions.width && player1.position.y <= project.position.y + 150) {
             // open link to project
             open(project.project.link, '_blank')
+
+            // disable buttons to prevent multiple pages from opening
+            left.isPressed = false
+            right.isPressed = false
+        }
+    })
+
+    // draw social links and detect collisions
+    socialLinks.forEach(socialLink => {
+        console.log(socialLink)
+        socialLink.draw(ctx)
+
+        if (player1.position.x + 100 >= socialLink.position.x && player1.position.x <= socialLink.position.x + socialLink.dimensions.width && player1.position.y <= socialLink.position.y + 50) {
+            // open link to social site
+            open(socialLink.social.link, '_blank')
 
             // disable buttons to prevent multiple pages from opening
             left.isPressed = false
