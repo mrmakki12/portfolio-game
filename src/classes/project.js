@@ -1,30 +1,14 @@
-const projects = [
-    {
-        link: 'https://tyreeckcodes.com',
-        img: ''
-    },
-    {
-        link: 'https://mblog-api.herokuapp.com/',
-        img: ''
-    },
-    { 
-        link: 'https://reddit-miniapp.netlify.app/',
-        img: ''
-    }, 
-    { 
-        link: 'https://donutland2.netlify.app/',
-        img: ''
-    }, 
-    { 
-        link: 'https://the-sunnyside-agency.netlify.app/',
-        img: ''
-    }
-]
+// import all images
+import portfolio from '../images/projects_images/portfolio.png'
+import donutland2 from '../images/projects_images/donutland2.png'
+import reddit from '../images/projects_images/reddit.png'
+import sunnyside from '../images/projects_images/sunnyside.png'
+import mblog from '../images/projects_images/mblog.png'
 
-export class Projects {
+class Project {
     // img == project screenshot, link == website link
-    constructor(x, y) {
-        this.projects = projects
+    constructor(x, y, project) {
+        this.project = project
 
         // projects position
         this.position = {
@@ -38,28 +22,49 @@ export class Projects {
             width: 300
         }
 
-        // current project index
-        this.currentProjectIndex = 0
     }
 
     // draw it
     // ctx == canvas context
     draw(ctx) {
-        ctx.fillStyle = 'blue'
-        ctx.fillRect(this.position.x, this.position.y, 300, 150)
-        ctx.fillStyle = 'black'
+       
+        ctx.drawImage(this.project.img, this.position.x, this.position.y, this.dimensions.width, this.dimensions.height)
+  
     }
 
-    // update
-    // ctx == canvas context
-    update(ctx) {
-        setTimeout(() => {
-            if (this.currentProjectIndex === this.projects.length - 1) {
-                this.currentProjectIndex = 0
-            } else {
-                this.currentProjectIndex += 1
-            }
-        }, 2500)
-        this.draw(ctx)
-    }
 }
+
+// image with change src
+const returnImage = (src) => {
+    const image = new Image()
+    image.src = src
+    return image
+}
+
+export const projects = [
+
+    new Project(200, 0,{
+        link: 'https://tyreeckcodes.com',
+        img: returnImage(portfolio)
+    }),
+
+    new Project(500, 0, {
+        link: 'https://mblog-api.herokuapp.com/',
+        img: returnImage(mblog)
+    }),
+    
+    new Project(700, 0, { 
+        link: 'https://reddit-miniapp.netlify.app/',
+        img: returnImage(reddit)
+    }), 
+
+    new Project(0, 0, { 
+        link: 'https://donutland2.netlify.app/',
+        img: returnImage(donutland2)
+    }), 
+
+    new Project(800, 0, { 
+        link: 'https://the-sunnyside-agency.netlify.app/',
+        img: returnImage(sunnyside)
+    })
+]
