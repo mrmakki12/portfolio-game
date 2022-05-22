@@ -18,6 +18,10 @@ const ground = new Platform(0, 800, canvas.width / 5, 50)
 const ground1 = new Platform(900, 800, canvas.width / 1.5, 50)
 const platforms = [ground, ground1, platform, platform1]
 
+// background
+const backgrounds = platforms.concat(projects, socialLinks)
+console.log(backgrounds)
+
 // player and its movement
 const player1 = new Player()
 
@@ -72,7 +76,7 @@ const play = () => {
 
         platform.update(ctx)
 
-        if (player1.position.y + 100 <= platform.position.y && player1.position.y + 100 + player1.velocity.y >= platform.position.y && player1.position.x + 100 >= platform.position.x && player1.position.x <= platform.position.x + platform.demensions.width) {
+        if (player1.position.y + 100 <= platform.position.y && player1.position.y + 100 + player1.velocity.y >= platform.position.y && player1.position.x + 100 >= platform.position.x && player1.position.x <= platform.position.x + platform.dimensions.width) {
             player1.velocity.y = 0
         }
     })
@@ -114,8 +118,8 @@ const play = () => {
         player1.position = {x: 100, y: 600}
 
         // reset background position
-        platforms.forEach(platform => {
-            platform.position.x = platform.resetPosition.x
+        backgrounds.forEach(background => {
+            background.position.x = background.resetPosition.x
         })
     }
 
@@ -133,17 +137,25 @@ const play = () => {
 
         player1.velocity.x = 0
 
+        // player going left, move background to right
         if (left.isPressed) {
-            platforms.forEach(platform => {
-                platform.velocity.x = 5
+
+            backgrounds.forEach(background => {
+                background.velocity.x = 5
             })
+
+        // player going right, move background to left
         } else if (right.isPressed) {
-            platforms.forEach(platform => {
-                platform.velocity.x = -5
+
+            backgrounds.forEach(background => {
+                background.velocity.x = -5
             })
+
+        // player standing still, stop moving background
         } else {
-            platforms.forEach(platform => {
-                platform.velocity.x = 0
+
+            backgrounds.forEach(background => {
+                background.velocity.x = 0
             })
         }
 
