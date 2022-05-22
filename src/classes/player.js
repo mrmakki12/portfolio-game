@@ -32,7 +32,7 @@ export class Player {
         this.position.y += this.velocity.y
         
         // update y position
-        if (this.position.y < 600) {
+        if (this.position.y < 800) {
             this.velocity.y += .75
         } else {
             this.velocity.y = 0
