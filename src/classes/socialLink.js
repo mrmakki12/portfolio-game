@@ -36,9 +36,14 @@ class SocialLink {
     // draw it
     // ctx == canvas context
     draw(ctx) {
-        
+
         ctx.drawImage(this.social.img, this.position.x, this.position.y, this.dimensions.width, this.dimensions.height)
-        
+    }
+
+    // background scroll
+    update(ctx) {
+        this.position.x += this.velocity.x
+        this.draw(ctx)
     }
 }
 
