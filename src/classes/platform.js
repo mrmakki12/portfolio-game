@@ -20,7 +20,7 @@ export class Platform {
         }
 
         // demensions
-        this.demensions = {
+        this.dimensions = {
             height,
             width,
         }
@@ -32,7 +32,7 @@ export class Platform {
     // draw it
     // ctx == canvas context
     draw(ctx) {
-        ctx.fillRect(this.position.x, this.position.y, this.demensions.width, this.demensions.height)
+        ctx.fillRect(this.position.x, this.position.y, this.dimensions.width, this.dimensions.height)
     }
 
     // background scroll
