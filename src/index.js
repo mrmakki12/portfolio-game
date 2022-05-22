@@ -14,7 +14,7 @@ canvas.width = innerWidth
 // platform
 const platform = new Platform(1000, 500, 200, 50)
 const platform1 = new Platform(600, 400, 200, 50)
-const ground = new Platform(0, 800, canvas.width / 3, 50)
+const ground = new Platform(0, 800, canvas.width / 5, 50)
 const ground1 = new Platform(900, 800, canvas.width / 1.5, 50)
 const platforms = [ground, ground1, platform, platform1]
 
@@ -70,7 +70,7 @@ const play = () => {
     // draw platforms and detect collisions
     platforms.forEach(platform => {
 
-        platform.draw(ctx)
+        platform.update(ctx)
 
         if (player1.position.y + 100 <= platform.position.y && player1.position.y + 100 + player1.velocity.y >= platform.position.y && player1.position.x + 100 >= platform.position.x && player1.position.x <= platform.position.x + platform.demensions.width) {
             player1.velocity.y = 0
@@ -114,22 +114,40 @@ const play = () => {
         player1.position = {x: 100, y: 600}
 
         // reset background position
+        platforms.forEach(platform => {
+            platform.position.x = platform.resetPosition.x
+        })
     }
 
-    // update velocity based on events
-    if (right.isPressed) {
+    // update velocity of player and background 
+    // based on key events and position
+    if (right.isPressed && player1.position.x <= 500) {
 
         player1.velocity.x = 5
+
+    } else if (left.isPressed && player1.position.x >= 100) {
+
+        player1.velocity.x = -5
 
     } else {
 
         player1.velocity.x = 0
+
+        if (left.isPressed) {
+            platforms.forEach(platform => {
+                platform.velocity.x = 5
+            })
+        } else if (right.isPressed) {
+            platforms.forEach(platform => {
+                platform.velocity.x = -5
+            })
+        } else {
+            platforms.forEach(platform => {
+                platform.velocity.x = 0
+            })
+        }
+
     }
-
-    if (left.isPressed) {
-
-        player1.velocity.x = -5
-    } 
 
     // draw player
     player1.update(ctx)
