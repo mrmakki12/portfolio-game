@@ -18,6 +18,17 @@ class Project {
             y
         }
 
+        // reset postion when player dies
+        this.resetPosition = {
+            x,
+        }
+
+        // velocity
+        // used when background scrolls
+        this.velocity = {
+            x: 0
+        }
+
         // dimensions 
         this.dimensions = {
             height: 150,
