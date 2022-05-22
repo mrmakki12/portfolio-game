@@ -84,7 +84,7 @@ const play = () => {
     // draw projects and detect collisions
     projects.forEach(project => {
 
-        project.draw(ctx)
+        project.update(ctx)
     
         if (player1.position.x + 100 >= project.position.x && player1.position.x <= project.position.x + project.dimensions.width && player1.position.y <= project.position.y + 150) {
             // open link to project
@@ -99,7 +99,7 @@ const play = () => {
     // draw social links and detect collisions
     socialLinks.forEach(socialLink => {
 
-        socialLink.draw(ctx)
+        socialLink.update(ctx)
 
         if (player1.position.x + 100 >= socialLink.position.x && player1.position.x <= socialLink.position.x + socialLink.dimensions.width && player1.position.y <= socialLink.position.y + 50) {
             // open link to social site
