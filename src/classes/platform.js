@@ -1,7 +1,7 @@
 // import platform image here
-import ground from '../images/other/ground.png'
-import mediumPlatform from '../images/other/med-platform.png'
-import tallPlatform from '../images/other/tall-thin-platform.png'
+import ground from '../images/platform_images/ground.png'
+import mediumPlatform from '../images/platform_images/med-platform.png'
+import tallPlatform from '../images/platform_images/tall-thin-platform.png'
 // return image helper function
 import { returnImage } from '../helper_functions/helper'
 
@@ -81,5 +81,9 @@ export const platforms = [
 
     new Platform(7840, 700, 530, 180, ground),
 
-    new Platform(8370, 700, 530, 180, ground)
+    new Platform(8370, 700, 530, 180, ground),
+
+    new Platform(8900, 700, 530, 180, ground),
+
+    new Platform(9300, 500, 370, 348, mediumPlatform)
 ]
