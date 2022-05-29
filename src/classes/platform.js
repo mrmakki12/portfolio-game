@@ -55,5 +55,31 @@ export const platforms = [
 
     new Platform(1060, 700, 530, 180, ground),
 
-    new Platform(1800, 500, 370, 348, mediumPlatform)
+    new Platform(1850, 500, 370, 348, mediumPlatform),
+
+    new Platform(2100, 700, 530, 180, ground),
+
+    new Platform(2900, 700, 530, 180, ground),
+
+    new Platform(3600, 550, 168, 477, tallPlatform),
+
+    new Platform(3800, 350, 168, 477, tallPlatform),
+
+    new Platform(4100, 500, 370, 348, mediumPlatform),
+
+    new Platform(4500, 700, 530, 180, ground),
+
+    new Platform(5100, 700, 530, 180, ground),
+
+    new Platform(5750, 500, 370, 348, mediumPlatform),
+
+    new Platform(6250, 700, 530, 180, ground),
+
+    new Platform(6780, 700, 530, 180, ground),
+
+    new Platform(7310, 700, 530, 180, ground),
+
+    new Platform(7840, 700, 530, 180, ground),
+
+    new Platform(8370, 700, 530, 180, ground)
 ]
