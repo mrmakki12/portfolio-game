@@ -85,5 +85,11 @@ export const platforms = [
 
     new Platform(8900, 700, 530, 180, ground),
 
-    new Platform(9300, 500, 370, 348, mediumPlatform)
+    new Platform(9700, 500, 370, 348, mediumPlatform),
+
+    new Platform(10100, 700, 530, 180, ground),
+
+    new Platform(10630, 700, 530, 180, ground),
+
+    new Platform(11160, 700, 520, 180, ground)
 ]
