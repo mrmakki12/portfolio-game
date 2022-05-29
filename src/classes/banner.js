@@ -8,6 +8,8 @@ import Skills from '../images/other/skills.png'
 import AudioOn from '../images/other/audio-on.png'
 import AudioOff from '../images/other/audio-off.png'
 import ProjectsHeader from '../images/other/projects-header.png'
+// audio
+import GameSound from '../audio/gamesound.mp3'
 // return image helper function
 import { returnImage } from '../helper_functions/helper'
 
@@ -74,3 +76,26 @@ export const staticBanners = [
 
     new Banner(1400, 10, 125, 125, AudioOn)
 ]
+
+const gameSound = new Audio(GameSound)
+gameSound.volume = 0.25
+gameSound.loop = true
+console.log(gameSound.volume)
+let playing = false
+addEventListener('click', (event) => {
+    console.log(event.x, event.y)
+    const audioBanner = staticBanners[1]
+    if (event.x >= audioBanner.position.x && event.x <= audioBanner.position.x + audioBanner.dimensions.width && event.y >= audioBanner.position.y && event.y <= audioBanner.position.y + audioBanner.dimensions.height) {
+        if (!playing) {
+            console.log('play')
+            gameSound.play()
+            playing = !playing
+        } else {
+            console.log('stop playing')
+            gameSound.pause()
+            playing = !playing 
+        }
+        audioBanner.image.src == AudioOn ? audioBanner.image.src = AudioOff : audioBanner.image.src = AudioOn
+
+    }
+})
