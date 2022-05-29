@@ -22,7 +22,7 @@ export class Player {
     // ctx == canvas context
     draw(ctx) {
         // probably have to flip image when player goes left
-        ctx.fillRect(this.position.x, this.position.y, 100, 100)
+        ctx.fillRect(this.position.x, this.position.y, 75, 75)
     }
 
     // update position
