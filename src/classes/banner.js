@@ -12,6 +12,12 @@ import ProjectsHeader from '../images/other/projects-header.png'
 import GameSound from '../audio/gamesound.mp3'
 // return image helper function
 import { returnImage } from '../helper_functions/helper'
+// instantiate audio
+const gameSound = new Audio(GameSound)
+gameSound.volume = 0.25
+gameSound.loop = true
+let playing = false
+
 
 class Banner {
     constructor(x, y, width, height, image) {
@@ -77,11 +83,6 @@ export const staticBanners = [
     new Banner(1400, 10, 125, 125, AudioOn)
 ]
 
-const gameSound = new Audio(GameSound)
-gameSound.volume = 0.25
-gameSound.loop = true
-console.log(gameSound.volume)
-let playing = false
 addEventListener('click', (event) => {
     console.log(event.x, event.y)
     const audioBanner = staticBanners[1]
