@@ -1,13 +1,13 @@
 // import banner images
-import TyreeckHeader from '../images/other/tyreeck-header.png'
-import HelloHeader from '../images/other/hello-header.png'
-import Controls from '../images/other/controls.png'
-import Me from '../images/other/me.jpg'
-import SkillsHeader from '../images/other/skills-header.png'
-import Skills from '../images/other/skills.png'
-import AudioOn from '../images/other/audio-on.png'
-import AudioOff from '../images/other/audio-off.png'
-import ProjectsHeader from '../images/other/projects-header.png'
+import TyreeckHeader from '../images/banner_images/tyreeck-header.png'
+import HelloHeader from '../images/banner_images/hello-header.png'
+import Controls from '../images/banner_images/controls.png'
+import Me from '../images/banner_images/me.jpg'
+import SkillsHeader from '../images/banner_images/skills-header.png'
+import Skills from '../images/banner_images/skills.png'
+import AudioOn from '../images/banner_images/audio-on.png'
+import AudioOff from '../images/banner_images/audio-off.png'
+import ProjectsHeader from '../images/banner_images/projects-header.png'
 // audio
 import GameSound from '../audio/gamesound.mp3'
 // return image helper function
