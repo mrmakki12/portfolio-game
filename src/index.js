@@ -2,28 +2,22 @@
 const canvas = document.getElementById('canvas')
 // get context
 const ctx = canvas.getContext('2d')
-// import all needed classes
+// import all needed classes/elements
 import { Player } from './classes/player'
-import { Platform } from './classes/platform'
+import { banners, staticBanners } from './classes/banner'
+import { platforms } from './classes/platform'
 import { projects } from './classes/project'
 import { socialLinks } from './classes/socialLink'
 
 canvas.height = innerHeight
 canvas.width = innerWidth
 
-// platform
-const platform = new Platform(1000, 500, 200, 50)
-const platform1 = new Platform(600, 400, 200, 50)
-const ground = new Platform(0, 800, canvas.width / 5, 50)
-const ground1 = new Platform(900, 800, canvas.width / 1.5, 50)
-const platforms = [ground, ground1, platform, platform1]
-
-// background
-const backgrounds = platforms.concat(projects, socialLinks)
-console.log(backgrounds)
-
 // player and its movement
 const player1 = new Player()
+
+// background --made over everything that scrolls 
+// projects, social links, banner
+const backgrounds = banners.concat(platforms, projects, socialLinks)
 
 // controller used in listen events to update x-axis velocity
 const right = {
@@ -70,6 +64,27 @@ addEventListener('keyup', ({key}) => {
 const play = () => {
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    // background
+    ctx.fillStyle = '#fffded'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = 'black'
+
+    // draw banners
+    banners.forEach(banner => {
+
+        banner.update(ctx)
+
+        if (player1.position.y + 100 <= banner.position.y && player1.position.y + 100 + player1.velocity.y >= banner.position.y && player1.position.x + 100 >= banner.position.x && player1.position.x <= banner.position.x + banner.dimensions.width) {
+            player1.velocity.y = 0
+        }
+    })
+
+    staticBanners.forEach(banner => {
+
+        banner.draw(ctx)
+
+    })
     
     // draw platforms and detect collisions
     platforms.forEach(platform => {
