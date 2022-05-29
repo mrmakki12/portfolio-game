@@ -31,8 +31,8 @@ class Project {
 
         // dimensions 
         this.dimensions = {
-            height: 150,
-            width: 300
+            height: 250,
+            width: 445
         }
 
     }
@@ -55,27 +55,27 @@ class Project {
 // all projects to be rendered
 export const projects = [
 
-    new Project(200, 0,{
+    new Project(6500, 50,{
         link: 'https://tyreeckcodes.com',
         img: returnImage(portfolio)
     }),
 
-    new Project(500, 0, {
+    new Project(7030, 50, {
         link: 'https://mblog-api.herokuapp.com/',
         img: returnImage(mblog)
     }),
     
-    new Project(700, 0, { 
+    new Project(7560, 50, { 
         link: 'https://reddit-miniapp.netlify.app/',
         img: returnImage(reddit)
     }), 
 
-    new Project(0, 0, { 
+    new Project(8090, 50, { 
         link: 'https://donutland2.netlify.app/',
         img: returnImage(donutland2)
     }), 
 
-    new Project(800, 0, { 
+    new Project(8620, 50, { 
         link: 'https://the-sunnyside-agency.netlify.app/',
         img: returnImage(sunnyside)
     })
