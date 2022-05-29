@@ -102,11 +102,11 @@ export const handleDeath = (player, backgrounds) => {
 export const updatePlayerBackgroundVelocity = (player, left, right, backgrounds) => {
     if (right.isPressed && player.position.x <= 500) {
 
-        player.velocity.x = 5
+        player.velocity.x = 7
 
     } else if (left.isPressed && player.position.x >= 100) {
 
-        player.velocity.x = -5
+        player.velocity.x = -7
 
     } else {
 
@@ -116,14 +116,14 @@ export const updatePlayerBackgroundVelocity = (player, left, right, backgrounds)
         if (left.isPressed) {
 
             backgrounds.forEach(background => {
-                background.velocity.x = 5
+                background.velocity.x = 7
             })
 
         // player going right, move background to left
         } else if (right.isPressed) {
 
             backgrounds.forEach(background => {
-                background.velocity.x = -5
+                background.velocity.x = -7
             })
 
         // player standing still, stop moving background
