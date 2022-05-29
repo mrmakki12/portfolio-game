@@ -1,7 +1,12 @@
 // import platform image here
+import ground from '../images/other/ground.png'
+import mediumPlatform from '../images/other/med-platform.png'
+import tallPlatform from '../images/other/tall-thin-platform.png'
+// return image helper function
+import { returnImage } from '../helper_functions/helper'
 
-export class Platform {
-    constructor(x, y, width, height) {
+class Platform {
+    constructor(x, y, width, height, image) {
         // set position
         this.position = {
             x,
@@ -26,13 +31,13 @@ export class Platform {
         }
 
         // platform image
-        this.image = ''
+        this.image = returnImage(image)
     }
 
     // draw it
     // ctx == canvas context
     draw(ctx) {
-        ctx.fillRect(this.position.x, this.position.y, this.dimensions.width, this.dimensions.height)
+        ctx.drawImage(this.image, this.position.x, this.position.y, this.dimensions.width, this.dimensions.height)
     }
 
     // background scroll
@@ -41,3 +46,14 @@ export class Platform {
         this.draw(ctx)
     }
 }
+
+export const platforms = [
+
+    new Platform(0, 700, 530, 180, ground),
+
+    new Platform(530, 700, 530, 180, ground),
+
+    new Platform(1060, 700, 530, 180, ground),
+
+    new Platform(1800, 500, 370, 348, mediumPlatform)
+]
