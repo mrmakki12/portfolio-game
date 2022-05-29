@@ -50,12 +50,12 @@ class SocialLink {
 // all links used
 export const socialLinks = [
     
-    new SocialLink(1500, 100, { 
+    new SocialLink(10500, 325, { 
         img: returnImage(github), 
         link: 'https://github.com/mrmakki12/'
     }),
 
-    new SocialLink(1200, 100, {
+    new SocialLink(11030, 325, {
         img: returnImage(linkedIn), 
         link: 'https://www.linkedin.com/in/tyreeck-makki/'
     })
