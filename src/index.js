@@ -29,7 +29,7 @@ const left = {
 
 // listen to events and update player controller values
 addEventListener('keydown', (event) => {
-
+    console.log(event.key)
     switch(event.key) {
 
         case 'a' || 'A':
@@ -68,30 +68,14 @@ const play = () => {
     // background
     ctx.fillStyle = '#fffded'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = 'red'
 
-    // draw banners
-    banners.forEach(banner => {
-
-        banner.update(ctx)
-
-        if (player1.position.y + 100 <= banner.position.y && player1.position.y + 100 + player1.velocity.y >= banner.position.y && player1.position.x + 100 >= banner.position.x && player1.position.x <= banner.position.x + banner.dimensions.width) {
-            player1.velocity.y = 0
-        }
-    })
-
-    staticBanners.forEach(banner => {
-
-        banner.draw(ctx)
-
-    })
-    
     // draw platforms and detect collisions
     platforms.forEach(platform => {
 
         platform.update(ctx)
 
-        if (player1.position.y + 100 <= platform.position.y && player1.position.y + 100 + player1.velocity.y >= platform.position.y && player1.position.x + 100 >= platform.position.x && player1.position.x <= platform.position.x + platform.dimensions.width) {
+        if (player1.position.y + 50 <= platform.position.y && player1.position.y + 50 + player1.velocity.y >= platform.position.y && player1.position.x + 75 >= platform.position.x && player1.position.x <= platform.position.x + platform.dimensions.width) {
             player1.velocity.y = 0
         }
     })
@@ -101,7 +85,7 @@ const play = () => {
 
         project.update(ctx)
     
-        if (player1.position.x + 100 >= project.position.x && player1.position.x <= project.position.x + project.dimensions.width && player1.position.y <= project.position.y + 150) {
+        if (player1.position.x + 75 >= project.position.x && player1.position.x <= project.position.x + project.dimensions.width && player1.position.y <= project.position.y + project.dimensions.height) {
             // open link to project
             open(project.project.link, '_blank')
 
@@ -111,12 +95,25 @@ const play = () => {
         }
     })
 
+    // draw banners
+    banners.forEach(banner => {
+
+        banner.update(ctx)
+        
+    })
+
+    staticBanners.forEach(banner => {
+
+        banner.draw(ctx)
+
+    })
+
     // draw social links and detect collisions
     socialLinks.forEach(socialLink => {
 
         socialLink.update(ctx)
 
-        if (player1.position.x + 100 >= socialLink.position.x && player1.position.x <= socialLink.position.x + socialLink.dimensions.width && player1.position.y <= socialLink.position.y + 50) {
+        if (player1.position.x + 75 >= socialLink.position.x && player1.position.x <= socialLink.position.x + socialLink.dimensions.width && player1.position.y <= socialLink.position.y + 50) {
             // open link to social site
             open(socialLink.social.link, '_blank')
 
