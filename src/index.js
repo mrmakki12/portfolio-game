@@ -8,8 +8,11 @@ import { banners, staticBanners } from './classes/banner'
 import { platforms } from './classes/platform'
 import { projects } from './classes/project'
 import { socialLinks } from './classes/socialLink'
+// death audio
+import dead from './audio/dead.mp3'
 
-canvas.height = innerHeight
+const deadAudio = new Audio(dead)
+canvas.height = 1080
 canvas.width = innerWidth
 
 // player and its movement
@@ -125,7 +128,7 @@ const play = () => {
 
     // detect death and reset character/map position
     if (player1.position.y > 800) {
-
+        deadAudio.play()
         // reset player position
         player1.position = {x: 100, y: 600}
 
