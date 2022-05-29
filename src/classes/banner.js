@@ -8,6 +8,10 @@ import Skills from '../images/banner_images/skills.png'
 import AudioOn from '../images/banner_images/audio-on.png'
 import AudioOff from '../images/banner_images/audio-off.png'
 import ProjectsHeader from '../images/banner_images/projects-header.png'
+import ContactHeader from '../images/banner_images/contact-header.png'
+import EndHeader from '../images/banner_images/end-header.png'
+import DeathHeader from '../images/banner_images/death-header.png'
+
 // audio
 import GameSound from '../audio/gamesound.mp3'
 // return image helper function
@@ -65,6 +69,8 @@ export const banners = [
 
     new Banner(175, 75, 1020, 600, TyreeckHeader),
 
+    new Banner(1650, 700, 120, 51, DeathHeader),
+
     new Banner(2200, 100, 680, 400, HelloHeader),
 
     new Banner(3000, 100, 400, 520, Me),
@@ -73,7 +79,11 @@ export const banners = [
 
     new Banner(4750, 100, 615, 500, Skills),
 
-    new Banner(5750, 100, 680, 400, ProjectsHeader)
+    new Banner(5750, 100, 680, 400, ProjectsHeader),
+
+    new Banner(9700, 100, 680, 400, ContactHeader),
+
+    new Banner(11160, 100, 680, 400, EndHeader)
 ]
 
 export const staticBanners = [
