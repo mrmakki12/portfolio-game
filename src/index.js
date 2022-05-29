@@ -8,19 +8,20 @@ import { banners, staticBanners } from './classes/banner'
 import { platforms } from './classes/platform'
 import { projects } from './classes/project'
 import { socialLinks } from './classes/socialLink'
-// death audio
-import dead from './audio/dead.mp3'
+// helper functions
+import { background, platformDrawCollisions, projectsDrawCollisions, 
+    socialsDrawCollisions, drawBanners, drawStaticBanners,
+handleDeath, updatePlayerBackgroundVelocity } from './helper_functions/helper'
 
-const deadAudio = new Audio(dead)
-canvas.height = 1080
+canvas.height = innerHeight < 1080 ? innerHeight : 1080
 canvas.width = innerWidth
-
-// player and its movement
-const player1 = new Player()
 
 // background --made over everything that scrolls 
 // projects, social links, banner
 const backgrounds = banners.concat(platforms, projects, socialLinks)
+
+// player and its movement
+const player1 = new Player()
 
 // controller used in listen events to update x-axis velocity
 const right = {
@@ -62,123 +63,28 @@ addEventListener('keyup', ({key}) => {
     }
 })
 
-
 // play the game -- animate canvas
 const play = () => {
-    // clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    // handle canvas clear, background update
+    background(ctx)
 
-    // background
-    ctx.fillStyle = '#fffded'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = 'red'
-
-    // draw platforms and detect collisions
-    platforms.forEach(platform => {
-
-        platform.update(ctx)
-
-        if (player1.position.y + 50 <= platform.position.y && player1.position.y + 50 + player1.velocity.y >= platform.position.y && player1.position.x + 75 >= platform.position.x && player1.position.x <= platform.position.x + platform.dimensions.width) {
-            player1.velocity.y = 0
-        }
-    })
-
-    // draw projects and detect collisions
-    projects.forEach(project => {
-
-        project.update(ctx)
-    
-        if (player1.position.x + 75 >= project.position.x && player1.position.x <= project.position.x + project.dimensions.width && player1.position.y <= project.position.y + project.dimensions.height) {
-            // open link to project
-            open(project.project.link, '_blank')
-
-            // disable buttons to prevent multiple pages from opening
-            left.isPressed = false
-            right.isPressed = false
-        }
-    })
+    // draw platforms/projects/social links and detect collisions
+    platformDrawCollisions(ctx, player1, platforms)
+    projectsDrawCollisions(ctx, player1, projects, left, right)
+    socialsDrawCollisions(ctx, player1, socialLinks, left, right)
 
     // draw banners
-    banners.forEach(banner => {
-
-        banner.update(ctx)
-        
-    })
-
-    staticBanners.forEach(banner => {
-
-        banner.draw(ctx)
-
-    })
-
-    // draw social links and detect collisions
-    socialLinks.forEach(socialLink => {
-
-        socialLink.update(ctx)
-
-        if (player1.position.x + 75 >= socialLink.position.x && player1.position.x <= socialLink.position.x + socialLink.dimensions.width && player1.position.y <= socialLink.position.y + 50) {
-            // open link to social site
-            open(socialLink.social.link, '_blank')
-
-            // disable buttons to prevent multiple pages from opening
-            left.isPressed = false
-            right.isPressed = false
-        }
-    })
+    drawBanners(ctx, banners)
+    drawStaticBanners(ctx, staticBanners)
 
     // detect death and reset character/map position
-    if (player1.position.y > 800) {
-        deadAudio.play()
-        // reset player position
-        player1.position = {x: 100, y: 600}
+    handleDeath(player1, backgrounds)
 
-        // reset background position
-        backgrounds.forEach(background => {
-            background.position.x = background.resetPosition.x
-        })
-    }
-
-    // update velocity of player and background 
-    // based on key events and position
-    if (right.isPressed && player1.position.x <= 500) {
-
-        player1.velocity.x = 5
-
-    } else if (left.isPressed && player1.position.x >= 100) {
-
-        player1.velocity.x = -5
-
-    } else {
-
-        player1.velocity.x = 0
-
-        // player going left, move background to right
-        if (left.isPressed) {
-
-            backgrounds.forEach(background => {
-                background.velocity.x = 5
-            })
-
-        // player going right, move background to left
-        } else if (right.isPressed) {
-
-            backgrounds.forEach(background => {
-                background.velocity.x = -5
-            })
-
-        // player standing still, stop moving background
-        } else {
-
-            backgrounds.forEach(background => {
-                background.velocity.x = 0
-            })
-        }
-
-    }
+    // update velocity of player and background based on key events and position
+    updatePlayerBackgroundVelocity(player1, left, right, backgrounds)
 
     // draw player
     player1.update(ctx)
-
 
     requestAnimationFrame(play)
 }
